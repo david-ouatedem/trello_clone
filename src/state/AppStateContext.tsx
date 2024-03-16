@@ -1,18 +1,6 @@
 import React, { ReactNode } from "react";
 import { createContext, useContext, FC } from "react";
 
-type Task = {
-  id: string;
-  text: string;
-};
-type List = {
-  id: string;
-  text: string;
-  tasks: Task[];
-};
-export type AppState = {
-  lists: List[];
-};
 
 const appData: AppState = {
   lists: [
@@ -35,28 +23,28 @@ const appData: AppState = {
 };
 
 type AppStateContextProps = {
-  lists: List[]
-  getTaskByListId(id: string): Task[]
-}
+  lists: List[];
+  getTaskByListId(id: string): Task[];
+};
 
 const AppStateContext = createContext<AppStateContextProps>(
   {} as AppStateContextProps
-)
+);
 
-export const AppStateProvider: FC = ({children}) => {
-  const {lists} = appData
+export const AppStateProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const { lists } = appData;
 
   const getTaskByListId = (id: string) => {
-    return lists.find((list)=> list.id === id)?.tasks || []
-  }
+    return lists.find((list) => list.id === id)?.tasks || [];
+  };
 
   return (
-    <AppStateContext.Provider value={{lists, getTaskByListId}}>
+    <AppStateContext.Provider value={{ lists, getTaskByListId }}>
       {children}
     </AppStateContext.Provider>
-  )
-}
+  );
+};
 
 export const useAppState = () => {
-  return useContext(AppStateContext)
-}
+  return useContext(AppStateContext);
+};

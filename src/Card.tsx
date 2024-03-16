@@ -1,16 +1,15 @@
-import React from 'react'
-import { CardContainer } from './styles'
+import React from "react";
+import { CardContainer } from "./styles";
 
 type CardProps = {
-  text: string
-}
+  text: string;
+  id: string;
+};
 
-export function Card({ text }:CardProps) {
+export function Card({ text }: CardProps) {
   return (
     <div>
-      <CardContainer>
-        {text}
-      </CardContainer>
+      <CardContainer>{text}</CardContainer>
     </div>
-  )
+  );
 }
